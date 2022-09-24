@@ -2,6 +2,7 @@ package br.com.compasso.brazilianStates.controllers.forms;
 
 import br.com.compasso.brazilianStates.models.Region;
 import br.com.compasso.brazilianStates.models.State;
+import br.com.compasso.brazilianStates.repository.StateRepository;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +27,17 @@ public class StateForm {
 
     public State convert() {
         return new State(name, region, population, capital, area);
+    }
+
+    public State update(Long id, StateRepository stateRepository) {
+        State state = stateRepository.getReferenceById(id);
+        state.setName(this.name);
+        state.setRegion(this.region);
+        state.setPopulation(this.population);
+        state.setCapital(this.capital);
+        state.setArea(this.area);
+
+        return state;
     }
 
 }
