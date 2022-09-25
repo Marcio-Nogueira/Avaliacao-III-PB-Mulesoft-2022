@@ -16,13 +16,13 @@ public class StateForm {
 
     @NotNull @NotEmpty @Length(min = 3)
     private String name;
-    @NotNull @NotEmpty
+    @NotNull
     private Region region;
-    @NotNull @NotEmpty
+    @NotNull
     private Long population;
     @NotNull @NotEmpty @Length(min=3)
     private String capital;
-    @NotNull @NotEmpty
+    @NotNull
     private double area;
 
     public State convert() {

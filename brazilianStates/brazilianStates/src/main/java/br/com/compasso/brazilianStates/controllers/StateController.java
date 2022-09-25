@@ -35,9 +35,11 @@ public class StateController {
         Sort sort = Sort.by(Sort.DEFAULT_DIRECTION, "id");
 
         if (orderBy != null) {
-            if (orderBy.equalsIgnoreCase("population")) {
+            if (orderBy.equals("population")) {
                 sort = Sort.by(Sort.Direction.DESC, "population");
-            } else if (orderBy.equalsIgnoreCase("area"));
+            } else if (orderBy.equals("area")) {
+                sort = Sort.by(Sort.Direction.DESC, "area");
+            }
         }
 
         if (region != null) {
@@ -51,6 +53,7 @@ public class StateController {
     }
 
     @PostMapping
+    @Transactional
     @CacheEvict(value = "stateFilteredList")
     public ResponseEntity<StateDto> register(@RequestBody @Valid StateForm stateForm, UriComponentsBuilder uriBuilder) {
 

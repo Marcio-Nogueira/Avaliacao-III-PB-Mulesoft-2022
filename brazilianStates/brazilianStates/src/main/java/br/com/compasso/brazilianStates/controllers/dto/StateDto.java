@@ -2,9 +2,7 @@ package br.com.compasso.brazilianStates.controllers.dto;
 
 import br.com.compasso.brazilianStates.models.Region;
 import br.com.compasso.brazilianStates.models.State;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,6 +10,7 @@ import java.util.stream.Collectors;
 @Getter
 public class StateDto {
 
+    private Long id;
     private String name;
     private Region region;
     private long population;
@@ -19,6 +18,7 @@ public class StateDto {
     private double area;
 
     public StateDto(State state) {
+        this.id = state.getId();
         this.name = state.getName();
         this.region = state.getRegion();
         this.population = state.getPopulation();
