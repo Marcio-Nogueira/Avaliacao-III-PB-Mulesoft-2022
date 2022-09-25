@@ -28,7 +28,6 @@ public class StateController {
     private StateRepository stateRepository;
 
     @GetMapping
-    @Cacheable(value = "stateFilteredList")
     public List<StateDto> StateFilter(@RequestParam(required = false) Region region,
                                       @RequestParam(required = false) String orderBy) {
 
@@ -54,7 +53,6 @@ public class StateController {
 
     @PostMapping
     @Transactional
-    @CacheEvict(value = "stateFilteredList")
     public ResponseEntity<StateDto> register(@RequestBody @Valid StateForm stateForm, UriComponentsBuilder uriBuilder) {
 
         State state = stateForm.convert();
@@ -75,7 +73,6 @@ public class StateController {
 
     @PutMapping("/{id}")
     @Transactional
-    @CacheEvict(value = "stateFilteredList", allEntries = true)
     public ResponseEntity<StateDto> updateState(@PathVariable Long id, @RequestBody @Valid StateForm form ) {
         Optional<State> optional = stateRepository.findById(id);
         if (optional.isPresent()) {
@@ -87,7 +84,6 @@ public class StateController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    @CacheEvict(value = "stateFilteredList", allEntries = true)
     public ResponseEntity<?> remove(@PathVariable Long id) {
         Optional<State> optional = stateRepository.findById(id);
         if (optional.isPresent()) {
