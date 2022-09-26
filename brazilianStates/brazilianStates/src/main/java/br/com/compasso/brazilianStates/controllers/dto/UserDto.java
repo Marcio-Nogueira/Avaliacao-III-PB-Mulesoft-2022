@@ -1,11 +1,13 @@
 package br.com.compasso.brazilianStates.controllers.dto;
 
 import br.com.compasso.brazilianStates.models.User;
+import lombok.Getter;
 import org.springframework.data.domain.Page;
 
+@Getter
 public class UserDto {
 
-    private Long id;
+    private long id;
     private String name;
     private String email;
     private String password;

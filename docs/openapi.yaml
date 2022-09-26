@@ -1,0 +1,214 @@
+openapi: 3.0.1
+info: 
+  title: API Avaliação III – PB Mulesoft 2022
+  description: API para cadastrar estados brasileiros.
+  version: 0.0.1
+  termsOfService: https://mockapi.io
+  contact:
+    name: Suporte e Devs
+    email: mar.nogueira07@gmail.com
+    url: https://github.com/Marcio-Nogueira/Avaliacao-III-PB-Mulesoft-2022
+  license:
+    name: "Licença GPLv3"
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+servers:
+- url:  http//localhost:8080/api/v1
+  description: API de cadastro de estados brasileiros
+paths:
+  /estados:
+   get:
+      summary: Recupera todos os estados cadastrados
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Estados"
+      parameters:
+        - in: query
+          name: regionFilter
+          schema:
+            type: string
+          description: filtra os estados por região 
+        - in: query
+          name: orderByPopulation
+          schema:
+            type: integer
+          description: ordena os estados por população da maior para a menor
+        - in: query
+          name: orderByArea
+          schema:
+            type: number
+          description: ordena os estados por área da maior para a menor  
+   post:
+    summary: Cadastra um novo estado
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              descricao:
+                type: string
+    responses:
+      201:
+        description: "Sucesso"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Estado"
+    security: 
+      - autenticacao: []  
+  /estados/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+    get:
+      summary: Recupera um estado pelo ID
+      responses:
+        200:
+          description: sucesso
+          content:
+            application/json:
+              schema:
+               $ref: "#/components/schemas/Estado"
+        404:
+          description: Estado não encontrado
+          content: 
+            application/json:
+              example: "Not Found"
+    put:
+      summary: Atualiza um estado pelo ID
+      responses:
+        200:
+          description: sucesso
+          content:
+            application/json:
+              schema:
+               $ref: "#/components/schemas/Estado"
+        404:
+          description: Estado não encontrado
+          content: 
+            application/json:
+              example: "Not Found"
+      security: 
+      - autenticacao: [] 
+    delete:
+      summary: deleta um estado pelo ID
+      responses:
+        200:
+          description: sucesso
+          content:
+            application/json:
+              schema:
+               $ref: "#/components/schemas/Estado"
+        404:
+          description: Estado não encontrado
+          content: 
+            application/json:
+              example: "Not Found"
+      security: 
+      - autenticacao: []
+  /usuarios:
+    get:
+      summary: Recupera todos os usuarios cadastrados
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Estados"
+    post:
+     summary: Cadastra um novo usuario
+     requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              descricao:
+                type: string
+     responses:
+      201:
+        description: "Sucesso"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Usuarios"
+     security: 
+      - autenticacao: []   
+  /usuarios/{id}: 
+    parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+    put:
+      summary: Atualiza um usuario pelo ID
+      responses:
+        200:
+          description: sucesso
+          content:
+            application/json:
+              schema:
+               $ref: "#/components/schemas/Usuario"
+        404:
+          description: Usuario não encontrado
+          content: 
+            application/json:
+              example: "Not Found"
+      security: 
+      - autenticacao: []    
+components:
+  schemas:
+    Estado:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        region:
+          type: string
+        population:
+          type: integer
+        capital:
+          type: string
+        area:
+          type: number  
+    Estados:
+      type: array
+      items:
+        $ref: "#/components/schemas/Estado"
+    Usuario:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    Usuarios:
+      type: array
+      items:
+         $ref: "#/components/schemas/Usuario"
+  securitySchemes:
+    autenticacao:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+      
+      
+              
+                
+        

@@ -35,8 +35,7 @@ public class SecurityConfiguration {
                 .antMatchers(HttpMethod.GET, "/api/v1/estados").permitAll() //
                 .antMatchers(HttpMethod.GET, "/api/v1/estados/*").permitAll() //
                 .antMatchers(HttpMethod.POST, "/api/v1/autenticacao").permitAll() //
-                .antMatchers(HttpMethod.GET, "/").permitAll() //
-                .antMatchers(HttpMethod.DELETE, "/estados/*").permitAll() //
+                .antMatchers(HttpMethod.GET, "/api/v1/usuarios").permitAll() //
                 .anyRequest().authenticated() //
                 .and().csrf().disable() //
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //
